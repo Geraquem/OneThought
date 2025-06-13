@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "174963975095",
+    "project_id": "onethought-59d06",
+    "storage_bucket": "onethought-59d06.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174963975095:android:2a6e681a3c9ad000ec3e32",
+        "android_client_info": {
+          "package_name": "com.mmfsin.onethought"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAItGVS4RVWvbKO633SmP_kh8ltlS_NiWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
