@@ -1,8 +1,9 @@
 package com.mmfsin.onethought.base
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-//@HiltAndroidApp
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
