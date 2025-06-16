@@ -12,7 +12,7 @@ class MainViewModel @Inject constructor(
 
     fun getData() {
         executeUseCase(
-            { getAdjectivesUseCase.execute() },
+            { getAdjectivesUseCase.execute("") },
             { result -> _event.value = MainEvent.GetData },
             { _event.value = MainEvent.SWW }
         )

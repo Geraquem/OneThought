@@ -1,5 +1,7 @@
 package com.mmfsin.onethought.domain.repositories
 
+import com.mmfsin.onethought.domain.models.Words
+
 interface IWordsRepository {
-    fun getAdjectives(): List<String>
+    suspend fun getAdjectives(): List<Words>
 }

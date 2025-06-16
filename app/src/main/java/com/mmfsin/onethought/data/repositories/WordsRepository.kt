@@ -1,16 +1,40 @@
 package com.mmfsin.onethought.data.repositories
 
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.mmfsin.onethought.data.mappers.toWordsList
+import com.mmfsin.onethought.data.models.WordsDTO
+import com.mmfsin.onethought.domain.models.Words
 import com.mmfsin.onethought.domain.repositories.IWordsRepository
+import com.mmfsin.onethought.utils.ADJECTIVES
+import com.mmfsin.onethought.utils.WORDS
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.concurrent.CountDownLatch
 import javax.inject.Inject
 
 class WordsRepository @Inject constructor() : IWordsRepository {
 
-    override fun getAdjectives(): List<String> {
+    private val reference = Firebase.database.reference
 
-        println("***********************************************************************************")
-        println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-        println("***********************************************************************************")
+    override suspend fun getAdjectives(): List<Words> {
+        val latch = CountDownLatch(1)
+        val result = mutableListOf<WordsDTO>()
 
-        return emptyList()
+        reference.child(WORDS).child(ADJECTIVES).get().addOnSuccessListener {
+            for (child in it.children) {
+                result.add(WordsDTO(word = child.value.toString()))
+            }
+            latch.countDown()
+        }.addOnFailureListener {
+            println("error ${it.message}")
+            latch.countDown()
+        }
+
+        withContext(Dispatchers.IO) {
+            latch.await()
+        }
+
+        return result.toWordsList()
     }
 }
