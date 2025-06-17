@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_offline_fragment"
+    app:startDestination="@id/offlineFragment">
+
+    <fragment
+        android:id="@+id/offlineFragment"
+        android:name="com.mmfsin.onethought.presentation.offline.OfflineFragment"
+        android:label="offlineFragment"
+        tools:layout="@layout/fragment_offline" />
+
+</navigation>
