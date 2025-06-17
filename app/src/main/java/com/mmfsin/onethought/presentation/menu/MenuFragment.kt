@@ -25,6 +25,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        viewModel.getDefaultRoutines()
+        navigateToOffline()
     }
 
     override fun setUI() {
@@ -33,11 +34,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun setListeners() {
         binding.apply {
-            btnOffline.setOnClickListener {
-                if (activity is MainActivity) {
-                    (activity as MainActivity).openBedRockActivity(navGraph = R.navigation.nav_graph_offline)
-                }
-            }
+            btnOffline.setOnClickListener { navigateToOffline() }
+        }
+    }
+
+    private fun navigateToOffline() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).openBedRockActivity(navGraph = R.navigation.nav_graph_offline)
         }
     }
 

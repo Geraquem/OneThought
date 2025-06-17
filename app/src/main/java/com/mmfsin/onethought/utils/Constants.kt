@@ -10,3 +10,7 @@ const val BEDROCK_STR_ARGS = "bedrock_str_args"
 const val BEDROCK_BOOLEAN_ARGS = "bedrock_boolean_args"
 const val BEDROCK_PARCELABLE_ARGS = "bedrock_parcelable_args"
 const val LOCAL_BROADCAST_FILTER = "local_broadcast_filter"
+
+/** VELOCITY */
+const val FAST = 10L
+const val MEDIUM = 1000L

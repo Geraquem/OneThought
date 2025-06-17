@@ -5,6 +5,7 @@ import com.google.firebase.ktx.Firebase
 import com.mmfsin.onethought.data.mappers.toWordsList
 import com.mmfsin.onethought.data.models.WordsDTO
 import com.mmfsin.onethought.domain.models.Words
+import com.mmfsin.onethought.domain.models.WordsDivided
 import com.mmfsin.onethought.domain.repositories.IWordsRepository
 import com.mmfsin.onethought.utils.ADJECTIVES
 import com.mmfsin.onethought.utils.WORDS
@@ -17,7 +18,7 @@ class WordsRepository @Inject constructor() : IWordsRepository {
 
     private val reference = Firebase.database.reference
 
-    override suspend fun getAdjectives(): List<Words> {
+    override suspend fun getWordsFromFirebase(): List<Words> {
         val latch = CountDownLatch(1)
         val result = mutableListOf<WordsDTO>()
 
@@ -36,5 +37,12 @@ class WordsRepository @Inject constructor() : IWordsRepository {
         }
 
         return result.toWordsList()
+    }
+
+    override suspend fun getWordsFromBBDD(): WordsDivided {
+        return WordsDivided(
+            listOf(Words(word = "Guapo"), Words(word = "Chulo")),
+            listOf(Words(word = "Mágico"), Words(word = "Profe"))
+        )
     }
 }
