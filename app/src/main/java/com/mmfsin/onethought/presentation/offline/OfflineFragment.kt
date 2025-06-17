@@ -5,20 +5,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.mmfsin.onethought.R
 import com.mmfsin.onethought.base.BaseFragment
 import com.mmfsin.onethought.databinding.FragmentOfflineBinding
 import com.mmfsin.onethought.domain.models.Words
+import com.mmfsin.onethought.presentation.offline.dialogs.RoundsDialog
+import com.mmfsin.onethought.presentation.offline.dialogs.RoundsDialog.IRoundsListener
 import com.mmfsin.onethought.utils.FAST
 import com.mmfsin.onethought.utils.MEDIUM
 import com.mmfsin.onethought.utils.animateY
 import com.mmfsin.onethought.utils.checkNotNulls
 import com.mmfsin.onethought.utils.countDown
+import com.mmfsin.onethought.utils.showAlpha
 import com.mmfsin.onethought.utils.showErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>() {
+class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>(), IRoundsListener {
 
     override val viewModel: OfflineViewModel by viewModels()
     private lateinit var mContext: Context
@@ -27,6 +32,8 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
     private var bottomWords: List<Words>? = null
 
     private var index = 0
+    private var points = 0
+    private var totalRounds: Int? = null
 
     override fun inflateView(
         inflater: LayoutInflater, container: ViewGroup?
@@ -34,14 +41,46 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.let {
+            val dialog = RoundsDialog(this@OfflineFragment)
+            dialog.show(it.supportFragmentManager, "")
+        } ?: run { error() }
+    }
+
+    override fun totalRounds(rounds: Int) {
+        totalRounds = rounds
+        updateRounds()
+        setPoints()
+        showBottomData(show = true)
+
+        /** starting game */
         viewModel.getData()
     }
 
     override fun setUI() {
-        showCards(first = true, show = false)
+        binding.apply {
+            showCards(first = true, show = false)
+            showBottomData(show = false)
+        }
     }
 
-    override fun setListeners() {}
+    override fun setListeners() {
+        binding.apply {
+            clBottom.btnNext.setOnClickListener {
+                clBottom.btnNext.isEnabled = false
+                showCards(show = false)
+
+                totalRounds?.let { rounds ->
+                    index++
+                    if (index >= rounds) {
+                        Toast.makeText(requireContext(), "FINISH", Toast.LENGTH_SHORT).show()
+                    } else setUpData()
+
+                } ?: run { error() }
+            }
+        }
+    }
 
     override fun observe() {
         viewModel.event.observe(this) { event ->
@@ -60,13 +99,19 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
     private fun setUpData() {
         binding.apply {
             checkNotNulls(topWords, bottomWords) { top, bottom ->
-                tvTopWord.text = top[index].word
-                tvTopReversedWord.text = top[index].word
+                updateRounds()
 
-                tvBottomWord.text = bottom[index].word
-                tvBottomReversedWord.text = bottom[index].word
+                countDown(500) {
+                    tvTopWord.text = top[index].word
+                    tvTopReversedWord.text = top[index].word
 
-                countDown(500) { showCards(show = true) }
+                    tvBottomWord.text = bottom[index].word
+                    tvBottomReversedWord.text = bottom[index].word
+
+                    showCards(show = true)
+
+                    clBottom.btnNext.isEnabled = true
+                }
             }
         }
     }
@@ -83,6 +128,30 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
                 clCardBottom.animateY(height.toFloat(), speed)
             }
         }
+    }
+
+    private fun showBottomData(show: Boolean) {
+        binding.apply {
+            val speed = if (show) MEDIUM else FAST
+            val container = clBottom.container
+            container.post { container.showAlpha(show, speed) }
+        }
+    }
+
+    private fun updateRounds() {
+        totalRounds?.let { rounds ->
+            val result = getString(R.string.rounds_total, (index + 1).toString(), rounds.toString())
+            binding.clBottom.tvRoundsCount.text = result
+        }
+    }
+
+    private fun setPoints() {
+        val points = points.toString()
+        binding.clBottom.tvPoints.text = points
+    }
+
+    override fun goBack() {
+        activity?.onBackPressedDispatcher?.onBackPressed()
     }
 
     private fun error() = activity?.showErrorDialog(true)

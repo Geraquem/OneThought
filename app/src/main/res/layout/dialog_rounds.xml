@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_box"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/medium"
+    android:paddingVertical="@dimen/large">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/MediumTextView_Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/medium"
+        android:gravity="center"
+        android:text="@string/rounds_title"
+        android:textAllCaps="true" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/large"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_small">
+
+            <TextView
+                android:id="@+id/btn_five"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_five" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05" />
+
+            <TextView
+                android:id="@+id/btn_eight"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_eight" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_small">
+
+            <TextView
+                android:id="@+id/btn_ten"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_ten" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05" />
+
+            <TextView
+                android:id="@+id/btn_fifteen"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_fifteen" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_small">
+
+
+            <TextView
+                android:id="@+id/btn_twenty"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_twenty" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05" />
+
+            <TextView
+                android:id="@+id/btn_twenty_five"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.475"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_twenty_five" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_none"
+                style="@style/MediumTextView_Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/click_effect"
+                android:elevation="@dimen/elevation"
+                android:gravity="center"
+                android:padding="@dimen/medium_small"
+                android:text="@string/rounds_none"
+                android:textAllCaps="true" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

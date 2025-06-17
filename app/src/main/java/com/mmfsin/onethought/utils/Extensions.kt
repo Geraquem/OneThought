@@ -20,6 +20,11 @@ fun View.animateY(pos: Float, duration: Long) =
 fun View.animateX(pos: Float, duration: Long) =
     this.animate().translationX(pos).setDuration(duration)
 
+fun View.showAlpha(visible: Boolean, duration: Long) {
+    val visibility = if (visible) 1f else 0f
+    this.animate().alpha(visibility).setDuration(duration)
+}
+
 fun countDown(millis: Long, action: () -> Unit) {
     object : CountDownTimer(millis, 1000) {
         override fun onTick(millisUntilFinished: Long) {}

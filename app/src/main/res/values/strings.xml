@@ -11,4 +11,17 @@
     <string name="error_description">Inténtalo de nuevo más tarde</string>
     <string name="error_btn">Aceptar</string>
 
+    <!-- ROUNDS -->
+    <string name="rounds_title">¿Cuántas rondas quieres jugar?</string>
+    <string name="rounds_five">5</string>
+    <string name="rounds_eight">8</string>
+    <string name="rounds_ten">10</string>
+    <string name="rounds_fifteen">15</string>
+    <string name="rounds_twenty">20</string>
+    <string name="rounds_twenty_five">25</string>
+    <string name="rounds_none">Ninguna</string>
+
+    <string name="rounds_total">%1s/%2s Rondas</string>
+    <string name="rounds_points">Puntos:</string>
+
 </resources>
