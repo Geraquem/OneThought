@@ -171,6 +171,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            android:id="@+id/countdown"
+            layout="@layout/view_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/space"
+            app:layout_constraintLeft_toLeftOf="@id/space"
+            app:layout_constraintRight_toRightOf="@id/space"
+            app:layout_constraintTop_toTopOf="@id/space" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include

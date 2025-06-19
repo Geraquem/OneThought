@@ -41,8 +41,24 @@ class WordsRepository @Inject constructor() : IWordsRepository {
 
     override suspend fun getWordsFromBBDD(): WordsDivided {
         return WordsDivided(
-            listOf(Words(word = "Guapo"), Words(word = "Chulo")),
-            listOf(Words(word = "Mágico"), Words(word = "Profe"))
+            listOf(
+                Words(word = "uno"),
+                Words(word = "dos"),
+                Words(word = "tres"),
+                Words(word = "cuatro"),
+                Words(word = "cinco"),
+                Words(word = "seis"),
+                Words(word = "siete")
+            ),
+            listOf(
+                Words(word = "uno"),
+                Words(word = "dos"),
+                Words(word = "tres"),
+                Words(word = "cuatro"),
+                Words(word = "cinco"),
+                Words(word = "seis"),
+                Words(word = "siete")
+            )
         )
     }
 }

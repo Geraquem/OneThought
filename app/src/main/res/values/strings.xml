@@ -2,6 +2,7 @@
     <string name="app_name">One Thought</string>
 
     <string name="content_description">image</string>
+    <string name="zero">0</string>
 
     <!-- ADS -->
 
@@ -23,5 +24,9 @@
 
     <string name="rounds_total">%1s/%2s Rondas</string>
     <string name="rounds_points">Puntos:</string>
+
+    <string name="round_finished_title">¿Habéis dicho lo mismo?</string>
+    <string name="round_finished_positive">Sí</string>
+    <string name="round_finished_negative">No</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.mmfsin.onethought.utils
 
 import android.os.CountDownTimer
 import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.mmfsin.onethought.base.dialog.ErrorDialog
 
@@ -9,6 +10,9 @@ fun FragmentActivity.showErrorDialog(goBack: Boolean = false) {
     val dialog = ErrorDialog(goBack)
     this.let { dialog.show(it.supportFragmentManager, "") }
 }
+
+fun FragmentActivity?.showFragmentDialog(dialog: DialogFragment) =
+    this?.let { dialog.show(it.supportFragmentManager, "") }
 
 fun <T1 : Any, T2 : Any, R : Any> checkNotNulls(p1: T1?, p2: T2?, block: (T1, T2) -> R): R? {
     return if (p1 != null && p2 != null) block(p1, p2) else null
