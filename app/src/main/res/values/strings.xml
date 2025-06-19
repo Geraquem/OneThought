@@ -24,6 +24,9 @@
 
     <string name="rounds_total">%1s/%2s Rondas</string>
     <string name="rounds_points">Puntos:</string>
+    <string name="rounds_connection">Conexión mental</string>
+    <string name="rounds_connection_zero">0%</string>
+    <string name="rounds_connection_percent">%s%%</string>
 
     <string name="round_finished_answer">¡Respuesta!</string>
     <string name="round_finished_title">¿Habéis dicho lo mismo?</string>

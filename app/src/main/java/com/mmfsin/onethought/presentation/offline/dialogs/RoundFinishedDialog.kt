@@ -14,8 +14,10 @@ import com.mmfsin.onethought.base.BaseDialog
 import com.mmfsin.onethought.databinding.DialogRoundFinishedBinding
 import com.mmfsin.onethought.utils.countDown
 
-class RoundFinishedDialog(private val listener: IRoundFinishedListener) :
-    BaseDialog<DialogRoundFinishedBinding>() {
+class RoundFinishedDialog(
+    private val listener: IRoundFinishedListener,
+    val isFinalRound: Boolean
+) : BaseDialog<DialogRoundFinishedBinding>() {
 
     override fun inflateView(inflater: LayoutInflater) =
         DialogRoundFinishedBinding.inflate(inflater)
@@ -26,9 +28,14 @@ class RoundFinishedDialog(private val listener: IRoundFinishedListener) :
         isCancelable = false
         vibrate()
         binding.apply {
+
+            val aa = if (isFinalRound) "yes" else "no"
+            tvAnswer.text = aa
+
             llButtons.isVisible = false
             tvNextRound.visibility = View.INVISIBLE
-            countDown(2500) {
+//            countDown(2500) {
+            countDown(500) {
                 llButtons.isVisible = true
             }
         }
@@ -61,13 +68,19 @@ class RoundFinishedDialog(private val listener: IRoundFinishedListener) :
         binding.apply {
             llAnswer.visibility = View.INVISIBLE
             llButtons.visibility = View.INVISIBLE
-            tvNextRound.visibility = View.VISIBLE
-        }
 
-        countDown(1250) {
-            listener.roundFinished(successful)
-            dismiss()
+            if (isFinalRound) exitDialog(successful)
+            else {
+                tvNextRound.visibility = View.VISIBLE
+//                countDown(1250) { exitDialog(successful) }
+                countDown(250) { exitDialog(successful) }
+            }
         }
+    }
+
+    private fun exitDialog(successful: Boolean) {
+        listener.roundFinished(successful)
+        dismiss()
     }
 
     interface IRoundFinishedListener {

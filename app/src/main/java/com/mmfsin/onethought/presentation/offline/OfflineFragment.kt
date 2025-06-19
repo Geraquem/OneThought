@@ -1,6 +1,7 @@
 package com.mmfsin.onethought.presentation.offline
 
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -62,6 +63,7 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
     override fun setUI() {
         binding.apply {
             countdown.tvCount.visibility = View.INVISIBLE
+            clBottom.tvPercentConnection.text = getString(R.string.rounds_connection_zero)
             showCards(first = true, show = false)
             showBottomData(show = false)
         }
@@ -105,7 +107,8 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
     }
 
     private fun startCountdown() {
-        val totalMillis = 5000L
+//        val totalMillis = 5000L
+        val totalMillis = 500L
         val intervalMillis = 1000L
         val count = binding.countdown.tvCount
 
@@ -120,7 +123,12 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
             override fun onFinish() {
                 count.text = getString(R.string.zero)
                 count.visibility = View.INVISIBLE
-                activity?.showFragmentDialog(RoundFinishedDialog(this@OfflineFragment))
+                activity?.showFragmentDialog(
+                    RoundFinishedDialog(
+                        this@OfflineFragment,
+                        isFinalRound = (index + 1) == totalRounds
+                    )
+                )
             }
         }.start()
     }
@@ -151,12 +159,21 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
         totalRounds?.let { rounds ->
             val result = getString(R.string.rounds_total, (index + 1).toString(), rounds.toString())
             binding.clBottom.tvRoundsCount.text = result
+            updateMentalConnection()
         }
     }
 
     private fun updatePoints() {
         val points = points.toString()
         binding.clBottom.tvPoints.text = points
+    }
+
+    private fun updateMentalConnection() {
+        if (index != 0) {
+            val percent = (points * 100) / index
+            binding.clBottom.tvPercentConnection.text =
+                getString(R.string.rounds_connection_percent, percent.toString())
+        }
     }
 
     override fun roundFinished(successful: Boolean) {
