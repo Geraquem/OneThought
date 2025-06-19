@@ -13,4 +13,4 @@ const val LOCAL_BROADCAST_FILTER = "local_broadcast_filter"
 
 /** VELOCITY */
 const val FAST = 10L
-const val MEDIUM = 500L
+const val MEDIUM = 350L

@@ -61,6 +61,7 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
 
     override fun setUI() {
         binding.apply {
+            countdown.tvCount.visibility = View.INVISIBLE
             showCards(first = true, show = false)
             showBottomData(show = false)
         }
@@ -97,13 +98,13 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
                     tvBottomReversedWord.text = bottom[index].word
 
                     showCards(show = true)
-                    ssss()
+                    startCountdown()
                 }
             }
         }
     }
 
-    private fun ssss() {
+    private fun startCountdown() {
         val totalMillis = 5000L
         val intervalMillis = 1000L
         val count = binding.countdown.tvCount
@@ -111,12 +112,14 @@ class OfflineFragment : BaseFragment<FragmentOfflineBinding, OfflineViewModel>()
         object : CountDownTimer(totalMillis, intervalMillis) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = (millisUntilFinished + intervalMillis - 1) / intervalMillis
+                count.visibility = View.VISIBLE
                 val seconds = secondsRemaining.toString()
                 count.text = seconds
             }
 
             override fun onFinish() {
                 count.text = getString(R.string.zero)
+                count.visibility = View.INVISIBLE
                 activity?.showFragmentDialog(RoundFinishedDialog(this@OfflineFragment))
             }
         }.start()
