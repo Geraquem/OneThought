@@ -1,6 +1,7 @@
 package com.mmfsin.onethought.data.repositories
 
 import com.google.firebase.database.ktx.database
+import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.ktx.Firebase
 import com.mmfsin.onethought.data.mappers.toWordsList
 import com.mmfsin.onethought.data.models.WordsDTO
@@ -40,6 +41,30 @@ class WordsRepository @Inject constructor() : IWordsRepository {
     }
 
     override suspend fun getWordsFromBBDD(): WordsDivided {
+
+        val functions = FirebaseFunctions.getInstance()
+
+        val data = hashMapOf(
+            "respuesta1" to "palabraUno",
+            "respuesta2" to "palabraDos"
+        )
+
+        functions.getHttpsCallable("verificarCoincidencia")
+            .call(data)
+            .addOnSuccessListener { result ->
+                val map = result.data as Map<*, *>
+                val coinciden = map["coinciden"] as Boolean
+                if (coinciden) {
+                    val a = 2
+                } else {
+                    val a = 2
+                }
+            }
+            .addOnFailureListener { e ->
+                val a = 2
+            }
+
+
         return WordsDivided(
             listOf(
                 Words(word = "uno"),

@@ -10,6 +10,8 @@ import com.mmfsin.onethought.R
 import com.mmfsin.onethought.base.BaseFragment
 import com.mmfsin.onethought.databinding.FragmentMenuBinding
 import com.mmfsin.onethought.presentation.activities.MainActivity
+import com.mmfsin.onethought.presentation.online.dialogs.CreateRoomDialog
+import com.mmfsin.onethought.utils.showFragmentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +26,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.getDefaultRoutines()
-        navigateToOffline()
+//        navigateToOffline()
     }
 
     override fun setUI() {
@@ -34,6 +35,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun setListeners() {
         binding.apply {
+            btnCreateRoom.setOnClickListener {
+                activity?.showFragmentDialog(CreateRoomDialog { viewModel.createRoom(it) })
+            }
+
             btnOffline.setOnClickListener { navigateToOffline() }
         }
     }
@@ -47,6 +52,12 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
     override fun observe() {
         viewModel.event.observe(this) { event ->
             when (event) {
+                is MenuEvent.RoomCreated -> {
+                    println("-*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*-")
+                    println("room createdddd")
+                    println("-*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*--*-*-")
+                }
+
                 is MenuEvent.SWW -> error()
             }
         }

@@ -31,6 +31,36 @@
         app:layout_constraintRight_toRightOf="@id/gl_right"
         app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+            android:id="@+id/btn_create_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_effect"
+            android:backgroundTint="@color/light_red"
+            android:elevation="@dimen/small"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_small">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="@dimen/medium"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_vibration" />
+
+            <TextView
+                style="@style/BigTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Crear sala" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/large" />
+
         <TextView
             android:id="@+id/btn_offline"
             style="@style/MediumTextView"

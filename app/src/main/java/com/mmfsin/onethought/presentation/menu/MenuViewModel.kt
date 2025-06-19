@@ -1,18 +1,20 @@
 package com.mmfsin.onethought.presentation.menu
 
 import com.mmfsin.onethought.base.BaseViewModel
+import com.mmfsin.onethought.domain.usecases.CreateRoomUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
+    private val createRoomUseCase: CreateRoomUseCase
 ) : BaseViewModel<MenuEvent>() {
 
-    fun getData() {
-//        executeUseCase(
-//            { getAdjectivesUseCase.execute("") },
-//            { result -> _event.value = MainEvent.GetData },
-//            { _event.value = MainEvent.SWW }
-//        )
+    fun createRoom(roomName: String) {
+        executeUseCase(
+            { createRoomUseCase.execute(roomName) },
+            { result -> _event.value = MenuEvent.GetData },
+            { _event.value = MenuEvent.SWW }
+        )
     }
 }
